@@ -1,0 +1,439 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> function_definition
+Rule 2     function_definition -> ID ID LPAREN RPAREN LBRACE statement_list RBRACE
+Rule 3     statement_list -> statement_list statement
+Rule 4     statement_list -> statement
+Rule 5     statement -> expression SEMI
+Rule 6     statement -> return_statement SEMI
+Rule 7     return_statement -> ID expression
+Rule 8     expression -> expression PLUS expression
+Rule 9     expression -> expression MINUS expression
+Rule 10    expression -> expression TIMES expression
+Rule 11    expression -> expression DIVIDE expression
+Rule 12    expression -> NUMBER
+Rule 13    expression -> ID
+
+Terminals, with rules where they appear
+
+DIVIDE               : 11
+ID                   : 2 2 7 13
+LBRACE               : 2
+LPAREN               : 2
+MINUS                : 9
+NUMBER               : 12
+PLUS                 : 8
+RBRACE               : 2
+RPAREN               : 2
+SEMI                 : 5 6
+TIMES                : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 5 7 8 8 9 9 10 10 11 11
+function_definition  : 1
+program              : 0
+return_statement     : 6
+statement            : 3 4
+statement_list       : 2 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . function_definition
+    (2) function_definition -> . ID ID LPAREN RPAREN LBRACE statement_list RBRACE
+
+    ID              shift and go to state 3
+
+    program                        shift and go to state 1
+    function_definition            shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> function_definition .
+
+    $end            reduce using rule 1 (program -> function_definition .)
+
+
+state 3
+
+    (2) function_definition -> ID . ID LPAREN RPAREN LBRACE statement_list RBRACE
+
+    ID              shift and go to state 4
+
+
+state 4
+
+    (2) function_definition -> ID ID . LPAREN RPAREN LBRACE statement_list RBRACE
+
+    LPAREN          shift and go to state 5
+
+
+state 5
+
+    (2) function_definition -> ID ID LPAREN . RPAREN LBRACE statement_list RBRACE
+
+    RPAREN          shift and go to state 6
+
+
+state 6
+
+    (2) function_definition -> ID ID LPAREN RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 7
+
+
+state 7
+
+    (2) function_definition -> ID ID LPAREN RPAREN LBRACE . statement_list RBRACE
+    (3) statement_list -> . statement_list statement
+    (4) statement_list -> . statement
+    (5) statement -> . expression SEMI
+    (6) statement -> . return_statement SEMI
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+    (7) return_statement -> . ID expression
+
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 8
+
+    statement_list                 shift and go to state 9
+    statement                      shift and go to state 10
+    expression                     shift and go to state 11
+    return_statement               shift and go to state 12
+
+state 8
+
+    (13) expression -> ID .
+    (7) return_statement -> ID . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+
+    SEMI            reduce using rule 13 (expression -> ID .)
+    PLUS            reduce using rule 13 (expression -> ID .)
+    MINUS           reduce using rule 13 (expression -> ID .)
+    TIMES           reduce using rule 13 (expression -> ID .)
+    DIVIDE          reduce using rule 13 (expression -> ID .)
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 15
+
+state 9
+
+    (2) function_definition -> ID ID LPAREN RPAREN LBRACE statement_list . RBRACE
+    (3) statement_list -> statement_list . statement
+    (5) statement -> . expression SEMI
+    (6) statement -> . return_statement SEMI
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+    (7) return_statement -> . ID expression
+
+    RBRACE          shift and go to state 16
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 8
+
+    statement                      shift and go to state 17
+    expression                     shift and go to state 11
+    return_statement               shift and go to state 12
+
+state 10
+
+    (4) statement_list -> statement .
+
+    RBRACE          reduce using rule 4 (statement_list -> statement .)
+    NUMBER          reduce using rule 4 (statement_list -> statement .)
+    ID              reduce using rule 4 (statement_list -> statement .)
+
+
+state 11
+
+    (5) statement -> expression . SEMI
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+    SEMI            shift and go to state 18
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+
+state 12
+
+    (6) statement -> return_statement . SEMI
+
+    SEMI            shift and go to state 23
+
+
+state 13
+
+    (12) expression -> NUMBER .
+
+    SEMI            reduce using rule 12 (expression -> NUMBER .)
+    PLUS            reduce using rule 12 (expression -> NUMBER .)
+    MINUS           reduce using rule 12 (expression -> NUMBER .)
+    TIMES           reduce using rule 12 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 12 (expression -> NUMBER .)
+
+
+state 14
+
+    (13) expression -> ID .
+
+    PLUS            reduce using rule 13 (expression -> ID .)
+    MINUS           reduce using rule 13 (expression -> ID .)
+    TIMES           reduce using rule 13 (expression -> ID .)
+    DIVIDE          reduce using rule 13 (expression -> ID .)
+    SEMI            reduce using rule 13 (expression -> ID .)
+
+
+state 15
+
+    (7) return_statement -> ID expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+    SEMI            reduce using rule 7 (return_statement -> ID expression .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+
+state 16
+
+    (2) function_definition -> ID ID LPAREN RPAREN LBRACE statement_list RBRACE .
+
+    $end            reduce using rule 2 (function_definition -> ID ID LPAREN RPAREN LBRACE statement_list RBRACE .)
+
+
+state 17
+
+    (3) statement_list -> statement_list statement .
+
+    RBRACE          reduce using rule 3 (statement_list -> statement_list statement .)
+    NUMBER          reduce using rule 3 (statement_list -> statement_list statement .)
+    ID              reduce using rule 3 (statement_list -> statement_list statement .)
+
+
+state 18
+
+    (5) statement -> expression SEMI .
+
+    RBRACE          reduce using rule 5 (statement -> expression SEMI .)
+    NUMBER          reduce using rule 5 (statement -> expression SEMI .)
+    ID              reduce using rule 5 (statement -> expression SEMI .)
+
+
+state 19
+
+    (8) expression -> expression PLUS . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 24
+
+state 20
+
+    (9) expression -> expression MINUS . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 25
+
+state 21
+
+    (10) expression -> expression TIMES . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 26
+
+state 22
+
+    (11) expression -> expression DIVIDE . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . NUMBER
+    (13) expression -> . ID
+
+    NUMBER          shift and go to state 13
+    ID              shift and go to state 14
+
+    expression                     shift and go to state 27
+
+state 23
+
+    (6) statement -> return_statement SEMI .
+
+    RBRACE          reduce using rule 6 (statement -> return_statement SEMI .)
+    NUMBER          reduce using rule 6 (statement -> return_statement SEMI .)
+    ID              reduce using rule 6 (statement -> return_statement SEMI .)
+
+
+state 24
+
+    (8) expression -> expression PLUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMI            reduce using rule 8 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+  ! PLUS            [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+
+
+state 25
+
+    (9) expression -> expression MINUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMI            reduce using rule 9 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+  ! PLUS            [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+
+
+state 26
+
+    (10) expression -> expression TIMES expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMI            reduce using rule 10 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+  ! PLUS            [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+
+
+state 27
+
+    (11) expression -> expression DIVIDE expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMI            reduce using rule 11 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    TIMES           shift and go to state 21
+    DIVIDE          shift and go to state 22
+
+  ! PLUS            [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 26 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 26 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 26 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 26 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 27 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 27 resolved as shift
