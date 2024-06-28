@@ -27,9 +27,9 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> INT MAIN LPAREN RPAREN LBRACE statements RBRACE','program',7,'p_program','test.py',46),
-  ('statements -> statement','statements',1,'p_statements','test.py',50),
-  ('statements -> statements statement','statements',2,'p_statements','test.py',51),
-  ('statement -> PRINTF LPAREN STRING RPAREN SEMICOLON','statement',5,'p_statement','test.py',58),
-  ('statement -> RETURN NUMBER SEMICOLON','statement',3,'p_statement','test.py',59),
+  ('program -> INT MAIN LPAREN RPAREN LBRACE statements RBRACE','program',7,'p_program','main.py',46),
+  ('statements -> statement','statements',1,'p_statements','main.py',50),
+  ('statements -> statements statement','statements',2,'p_statements','main.py',51),
+  ('statement -> PRINTF LPAREN STRING RPAREN SEMICOLON','statement',5,'p_statement','main.py',58),
+  ('statement -> RETURN NUMBER SEMICOLON','statement',3,'p_statement','main.py',59),
 ]
